@@ -1,0 +1,28 @@
+
+<html>
+
+    <head>
+
+    </head>
+    <body>
+        <script>
+ 
+            var data = {
+                x: [1, 2, 3, 4, 5],
+                y: [10, 11, 12, 13, 14],
+                text: ['A', 'B', 'C', 'D', 'E'],
+                mode: 'markers',
+                type: 'scatter'
+            };
+
+            // Layout
+            var layout = {
+                title: 'Simple Scatter Plot'
+            };
+
+            // Create a scatter plot
+            Plotly.newPlot('scatter-plot', [data], layout);
+        </script>
+    </body>
+</html>
+

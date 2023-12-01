@@ -3,13 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Page Title</title>
+    <title>Personal Finanace Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color:blue;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .image{
+            display:flex;
+            align-items: center;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
+    <form>
+        <button type="button" onclick="redirectToPage()">Budgeting System</button>
+        <button type="button" onclick="redirectToPage()">Finance Education Page</button>
+        <button type="button" onclick="redirectToPage()">User Logging</button>
+        <button type="button" onclick="redirectToPage()">Data Visualizations</button>
+    </form>
+    <nav>
+        <a href="budgeting.html">Budgeting System</a>
+        <a href="educational.html">Finance Education Page</a>
+        <a href="user.html">User Logging</a>
+        <a href="visualizations.html">Data Visualizations</a>
+    </nav>
+    <section>
+        <h1>Welcome to the Personal Finance Manager</h1>
+        <p>In this webpage, we will provide users with a comprehensive tool for managing their finances effectively.</p>
+        <p>There will be several features involved including:</p>
+    </section>
+    <img id="image" src="fianance.jpeg" width="300" height="200">
+    <script>
+        function redirectToPage() {
+            // You can get form data if needed before redirection
+            // var formData = new FormData(document.getElementById("myForm"));
+            // Specify the URL you want to redirect the user to
+            var targetPage = "google.com";
 
-    <h1>Hello, World!</h1>
-
-    <p>This is a basic HTML template. You can start building your web page by adding more content and structure here.</p>
-
+            // Redirect the user to the specified page
+            window.location.href = targetPage;
+        }
+    </script>
 </body>
 </html>
