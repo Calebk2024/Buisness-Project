@@ -45,9 +45,21 @@
             width: 100%;
         }
         .image{
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
             display:flex;
-            align-items: center;
-            margin: 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            align-items:center;
+            justify-content:center
+        }
+        #class {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -59,10 +71,14 @@
         <a href="user.html">User Logging</a>
         <a href="visualizations.html">Data Visualizations</a>
     </nav>
-    <section>
+    <section id ="class">
         <h1>Welcome to the Personal Finance Manager</h1>
         <p>In this webpage, we will provide users with a comprehensive tool for managing their finances effectively.</p>
         <p>There will be several features involved including:</p>
+        <p>User Expense Logging and catagorizing transactons</p>
+        <p>Budgeting system for users to set weekly/monthly budgets</p>
+        <p>An educational page with basic financial principles and tips.</p>
+        <p>Data Visualizations tracking user logged expense</p>
     </section>
     <img id="image" src="finance.jpeg" width="300" height="200">
     <script>
