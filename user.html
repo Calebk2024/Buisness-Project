@@ -3,7 +3,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
             background-color: #f4f4f4;
         }
 
@@ -35,22 +36,32 @@
             border-radius: 4px;
         }
 
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        nav {
+            background-color: #333;
+            overflow: hidden;
         }
-
-        button:hover {
-            background-color: #45a049;
+    
+        nav a {
+            float: left;
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
         }
+    
+        nav a:hover {
+            background-color: #ddd;
+            color:blue;
+        }
+        
     </style>
 </head>
 <body>
+
+    <nav>
+        <a href="index.html">Back to homepage</a>
+    </nav>
 
     <h1>Expense Log</h1>
 
