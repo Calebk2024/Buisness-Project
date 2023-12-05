@@ -83,14 +83,47 @@
             <label for="monthlyBudget">Set Monthly Budget:</label>
             <input type="number" id="monthlyBudget" placeholder="Enter amount" required>
 
-            <button type="button" onclick="saveBudget()">Save Budget</button>
+            <button type="button" onclick="handleBudgetForm()">Save Budget</button>
         </form>
     </main>
 
     <script>
-        function saveBudget() {
-            let weeklyBudget = document.getElementById('weeklyBudget').value;
-            let monthlyBudget = document.getElementById('monthlyBudget').value;
+        class Budget {
+            constructor() {
+                this.weeklyBudget = 0;
+                this.monthlyBudget = 0;
+            }
+
+            setBudgets(weekly, monthly) {
+                this.weeklyBudget = weekly;
+                this.monthlyBudget = monthly;
+            }
+        }
+
+        class BudgetForm {
+            constructor(budgetInstance) {
+                this.budget = budgetInstance;
+            }
+
+            handleForm() {
+                const weeklyBudgetInput = document.getElementById('weeklyBudget');
+                const monthlyBudgetInput = document.getElementById('monthlyBudget');
+
+                const weeklyBudget = parseFloat(weeklyBudgetInput.value);
+                const monthlyBudget = parseFloat(monthlyBudgetInput.value);
+
+                this.budget.setBudgets(weeklyBudget, monthlyBudget);
+            }
+        }
+
+        const budgetInstance = new Budget();
+
+        const budgetFormInstance = new BudgetForm(budgetInstance);
+
+        function handleBudgetForm() {
+            budgetFormInstance.handleForm();
+
+            alert(`Weekly Budget: $${budgetInstance.weeklyBudget}\nMonthly Budget: $${budgetInstance.monthlyBudget}`);
         }
     </script>
 
