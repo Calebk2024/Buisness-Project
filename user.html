@@ -6,6 +6,7 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
+            text-align:center;
         }
 
         h1 {
@@ -69,8 +70,8 @@
         <label for="description">Description:</label>
         <input type="text" id="description" name="description" required>
 
-        <label for="amount">Amount:</label>
-        <input type="text" id="amount" name="amount" required>
+        <label for="amount">Amount: (dollars)</label>
+        <input type="number" id="amount" name="amount" step=".01" required>
 
         <label for="category">Category:</label>
         <select id="category" name="category" required>
@@ -80,23 +81,64 @@
             <option value="utilities">Utilities</option>
             <option value="entertainment">Entertainment</option>
         </select>
-        <input type="submit" />
-        <!--
-
-        <button type="button" onclick="logExpense()">Log Expense</button>
-        -->
+        <label for="birthdate">Select the date of transaction:</label>
+        <input type="date" id="birthdate" name="birthdate">
+        <input type="submit" onclick="logExpense()"/>
     </form>
+    <button type="button" id="myButton">Clear Expenses</button>
 
     <script>
         function logExpense() {
-            // Get form data
-            const description = document.getElementById('description').value;
-            const amount = document.getElementById('amount').value;
-            const category = document.getElementById('category').value;
+            var b=[]
+            var rows=0;
+            var columns=0;
+            for (var i = 0; i < rows; i++) {
+                b[i] = []; 
+                for (var j = 0; j < columns; j++) {
+                    b[i][j] = null;
+                }
+            }
+            const description = (document.getElementById('description').value);
+            const amount = (document.getElementById('amount').value);
+            const category = (document.getElementById('category').value);
+            const transactionDate = (document.getElementById('birthdate').value);
+
+            if(description=="" || amount=="" || category==""|| transactionDate==""){
+                alert('Please enter all fields');
+                return;
+            }
+            
+            localStorage.setItem("description", document.getElementById('description').value);
+            localStorage.setItem("amount", document.getElementById('amount').value);
+            localStorage.setItem("category", document.getElementById('category').value);
+            localStorage.setItem("transactionDate", document.getElementById('birthdate').value)
+            
+            window.location.href ='useranswer.html';
             document.getElementById('description').value = '';
             document.getElementById('amount').value = '';
             document.getElementById('category').value = '';
+            document.getElementById('birthdate').value='';
         }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            var myButton = document.getElementById('myButton');
+
+            myButton.addEventListener('click', function() {
+                alert('Expenses have been cleared');
+                localStorage.setItem("description", 0);
+                localStorage.setItem("amount", 0);
+                localStorage.setItem("category", 0);
+                localStorage.setItem("transactionDate", 0);
+                localStorage.setItem("food", 0);
+                localStorage.setItem("enter", 0);
+                localStorage.setItem("house", 0);
+                localStorage.setItem("trans", 0);
+                localStorage.setItem("util", 0);
+                b=[]
+            });
+        });
+        
+
     </script>
 
 </body>
