@@ -1,38 +1,131 @@
-<html>
-    <head>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-                background-color: #f4f4f4;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budgeting System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: blue;
+        }
+
+        main {
+            padding: 20px;
+            background-color: #fff;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border:1.5px solid black;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Back to homepage</a>
+    </nav>
+
+    <main>
+        <h2>Budgeting System</h2>
+        <form id="budgetForm">
+            <label for="weeklyBudget">Set Weekly Budget:</label>
+            <input type="number" id="weeklyBudget" placeholder="Enter amount" required>
+
+            <label for="monthlyBudget">Set Monthly Budget:</label>
+            <input type="number" id="monthlyBudget" placeholder="Enter amount" required>
+
+            <button type="button" onclick="handleBudgetForm()">Save Budget</button>
+        </form>
+    </main>
+
+    <script>
+        class Budget {
+            constructor() {
+                this.weeklyBudget = 0;
+                this.monthlyBudget = 0;
             }
 
-            nav {
-                background-color: #333;
-                overflow: hidden;
+            setBudgets(weekly, monthly) {
+                this.weeklyBudget = weekly;
+                this.monthlyBudget = monthly;
             }
-        
-            nav a {
-                float: left;
-                display: block;
-                color: #fff;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-            }
-        
-            nav a:hover {
-                background-color: #ddd;
-                color:blue;
+        }
+
+        class BudgetForm {
+            constructor(budgetInstance) {
+                this.budget = budgetInstance;
             }
 
-        </style>
-    </head>
-    <body>
-        
-        <nav>
-            <a href="index.html">Back to homepage</a>
-        </nav>
-    </body>
-    </html>
+            handleForm() {
+                const weeklyBudgetInput = document.getElementById('weeklyBudget');
+                const monthlyBudgetInput = document.getElementById('monthlyBudget');
+
+                const weeklyBudget = parseFloat(weeklyBudgetInput.value);
+                const monthlyBudget = parseFloat(monthlyBudgetInput.value);
+
+                this.budget.setBudgets(weeklyBudget, monthlyBudget);
+            }
+        }
+
+        const budgetInstance = new Budget();
+
+        const budgetFormInstance = new BudgetForm(budgetInstance);
+
+        function handleBudgetForm() {
+            budgetFormInstance.handleForm();
+
+            alert(`Weekly Budget: $${budgetInstance.weeklyBudget}\nMonthly Budget: $${budgetInstance.monthlyBudget}`);
+        }
+    </script>
+
+</body>
+</html>
