@@ -33,33 +33,14 @@
     <body>
         <nav>
             <a href="index.html">Back to homepage</a>
+            <a href="user.html">User Logging</a>
         </nav>
         <div id="plot"></div>
         <script>
-            //var dates = ['2023-01-01', '2023-02-01', '2023-02-01', '2023-02-01'];
-            //var values = [10, 15, 7, 20];
-            //var myArray = JSON.parse(localStorage.getItem("myArray")) || [];
-            /*
-            var d = Object.keys(myArray);
-            var v = Object.values(myArray);
-            var dateValueMap = {};
-            for (var i = 0; i < myArray.length; i++) {
-                var currentDate = myArray[i]["transactionDate"];
-                var currentValue = myArray[i]["amount"];
-                if (dateValueMap.hasOwnProperty(currentDate)) {
-                    dateValueMap[currentDate] += currentValue;
-                } 
-                else {
-                    dateValueMap[currentDate] = currentValue;
-                }
-            }*/
+            
             var myArray = JSON.parse(localStorage.getItem("myArray")) || [];
-
-            // Create arrays to store dates and values
             var dates = [];
             var values = [];
-
-            // Create a mapping of dates to their corresponding total values
             var dateValueMap = {};
             for (var i = 0; i < myArray.length; i++) {
                 var currentDate = myArray[i]["transactionDate"];
@@ -69,36 +50,31 @@
                     dateValueMap[currentDate] += currentValue;
                 } else {
                     dateValueMap[currentDate] = currentValue;
-                    dates.push(currentDate); // Add unique dates to the array
+                    dates.push(currentDate); 
                 }
             }
-
-            // Populate the values array with the corresponding total values for each date
             for (var i = 0; i < dates.length; i++) {
                 values.push(dateValueMap[dates[i]]);
             }
-            // Convert dates to date objects
             var dateObjects = dates.map(date => new Date(date+ "T00:00:00"));
-
             var trace = {
                 x: dateObjects,
                 y: values,
                 type: 'scatter',
                 mode: 'lines+markers'
             };
-
             var layout = {
                 title: 'Date Plot',
                 xaxis: {
                     title: 'Dates',
                     type: 'date',
-                    tickformat: '%Y-%m-%d'
+                    tickformat: '%Y-%m-%d',
+                    tickvals: dateObjects,
                 },
                 yaxis: {
                     title: 'Values'
                 }
             };
-
             Plotly.newPlot('plot', [trace], layout);
         </script>
     </body>
