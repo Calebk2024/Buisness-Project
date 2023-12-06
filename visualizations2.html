@@ -71,7 +71,7 @@
                 values.push(dateValueMap[dates[i]]);
             }
             // Convert dates to date objects
-            var dateObjects = dates.map(date => new Date(date));
+            var dateObjects = dates.map(date => new Date(date+ "T00:00:00"));
 
             var trace = {
                 x: dateObjects,
