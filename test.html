@@ -1,225 +1,206 @@
-<html>
-    <head>
-        <style>
-            
-            body {
-                font-family: Arial, sans-serif;
-                margin: 20px;
-            }
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
 
-            h2 {
-                color: #333;
-            }
+        h2 {
+            color: #333;
+        }
 
-            table {
-                border-collapse: collapse;
-                width: 100%;
-                margin-top: 20px;
-            }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
 
-            th, td {
-                border: 1px solid #ddd;
-                padding: 8px;
-                text-align: left;
-            }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
 
-            th {
-                background-color: #f2f2f2;
-            }
-        </style>
-       
-    </head>
-    <body>
-        <h2>Expense Table</h2>
-        <table border="1" id="dataTable">
-            <thead>
-                <tr>
-                    <th>Description</th>
-                    <th>Amount</th>
-                    <th>Category</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-        </table>
-        <table border="1" id="all">
-            <thead>
-                <tr>
-                    <th>Total</th>
-                    <th>Food Percentage</th>
-                    <th>Entertainment Percentage</th>
-                    <th>Housing Percentage</th>
-                    <th>Transportation Percentage</th>
-                    <th>Utilities Percentage</th>
-                </tr>
-            </thead>
-        </table>
-        <table border="1" id="two">
-            <thead>
-                <tr>
-                    <th>Amount spent per day</th>
-                    <th>Amount spent per week</th>
-                </tr>
-            </thead>
-        </table>
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Expense Table</h2>
+    <table border="1" id="dataTable">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+    </table>
+    <table border="1" id="all">
+        <thead>
+            <tr>
+                <th>Total</th>
+                <th>Food Percentage</th>
+                <th>Entertainment Percentage</th>
+                <th>Housing Percentage</th>
+                <th>Transportation Percentage</th>
+                <th>Utilities Percentage</th>
+            </tr>
+        </thead>
+    </table>
+    <table border="1" id="two">
+        <thead>
+            <tr>
+                <th>Amount spent per day</th>
+                <th>Amount spent per week</th>
+            </tr>
+        </thead>
+    </table>
 
-        <script>
-            var rows=0;
-            var columns=0;
-            var myArray = [];
-            for (var i = 0; i < rows; i++) {
-                myArray[i] = []; 
-                for (var j = 0; j < columns; j++) {
-                    myArray[i][j] = null;
-                }
-            }
-
-            function addRowToTable(name, amount, category,date) {
-                var table = document.getElementById('dataTable');
-                var newRow = table.insertRow(table.rows.length);
-                var cell1 = newRow.insertCell(0);
-                var cell2 = newRow.insertCell(1);
-                var cell3 = newRow.insertCell(2);
-                var cell4=newRow.insertCell(3);
-                cell1.innerHTML = name;
-                cell2.innerHTML = amount +" dollars";
-                cell3.innerHTML = category;
-                cell4.innerHTML=date;
-            }
-            var name = localStorage.getItem("final");
-            console.log(name);
-            console.log(name[0][4]);
-            var push=true;
-            for (var i = 0; i < name.length; i++){
-                if(name[i]==null){
-                    push=false;
-                }
-            }
-            if(push){
-                myArray.push(name);
-            }
-            add=0;
-            food=0;
-            enter=0;
-            house=0;
-            trans=0;
-            util=0;
-            console.log(myArray[0][3]);
-            for (var i = 0; i < myArray.length; i++) {
-                addRowToTable(myArray[i][0], myArray[i][1], myArray[i][2], myArray[i][3]);
-                add+=Number(myArray[i][1]);
-                if(myArray[i][2]=="food"){
-                    food+=Number(myArray[i][1]);
-                }
-                if(myArray[i][2]=="housing"){
-                    house+=Number(myArray[i][1]);
-                }
-                if(myArray[i][2]=="transportation"){
-                    trans+=Number(myArray[i][1]);
-                }
-                if(myArray[i][2]=="utilities"){
-                    util+=Number(myArray[i][1]);
-                }
-                if(myArray[i][2]=="entertainment"){
-                    enter+=Number(myArray[i][1]);
-                }
-            }
-            function samedates(Array){
-                const sameDayDates = [];
-                let counter=0;
-                Array.forEach(dateStr => {
-                    const dateObj = new Date(dateStr);
-                    const year = dateObj.getFullYear();
-                    const month = dateObj.getMonth() + 1; 
-                    const day = dateObj.getDate();
-                    const dateKey = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
-                    bool=true;
-                    for (let i = 0; i < sameDayDates.length; i++) {
-                        if(dateKey==sameDayDates[i]){
-                            bool=false;
-                        }
-                    }
-                    if(bool){
-                        sameDayDates.push(dateKey);
-                        counter+=1;
-                    }
-                });
-
-                return counter;
-            }
-            function findSameWeekDates(dateArray) {
-                const groupedByWeek = [];
-                let counter=0;
-
-                dateArray.forEach(dateStr => {
-                    const dateObj = new Date(dateStr);
-                    const year = dateObj.getFullYear();
-                    const weekNumber = getWeekNumber(dateObj);
-                    const weekKey = `${year}-W${weekNumber < 10 ? '0' : ''}${weekNumber}`;
-
-                    bool=true;
-                    for (let i = 0; i < groupedByWeek.length; i++) {
-                        if(weekKey==groupedByWeek[i]){
-                            bool=false;
-                        }
-                    }
-                    if(bool){
-                        groupedByWeek.push(weekKey)
-                        counter+=1
-                    }
-                });
-
-                return counter;
-            }
-
-            function getWeekNumber(date) {
-                const target = new Date(date.valueOf());
-                const dayNumber = (date.getDay() + 6) % 7;
-                target.setDate(target.getDate() - dayNumber + 3);
-                const firstThursday = target.valueOf();
-                target.setMonth(0, 1);
-                if (target.getDay() !== 4) {
-                    target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);
-                }
-                return 1 + Math.ceil((firstThursday - target) / 604800000);
-            }
-            var table = document.getElementById('all');
+    <script>
+        var myArray = JSON.parse(localStorage.getItem("myArray")) || [];
+        function addRowToTable(name, amount, category, date) {
+            var table = document.getElementById('dataTable');
             var newRow = table.insertRow(table.rows.length);
             var cell1 = newRow.insertCell(0);
             var cell2 = newRow.insertCell(1);
             var cell3 = newRow.insertCell(2);
-            var cell4 = newRow.insertCell(3)
-            var cell5 = newRow.insertCell(4);
-            var cell6 = newRow.insertCell(5);
-            cell1.innerHTML = add+" dollars";
-            cell2.innerHTML = parseFloat(food/add);
-            cell3.innerHTML = parseFloat(enter/add);
-            cell4.innerHTML = parseFloat(house/add);
-            cell5.innerHTML = parseFloat(trans/add);
-            cell6.innerHTML = parseFloat(util/add);
-            var t=document.getElementById('two');
-            var nw=t.insertRow(t.rows.length);
-            var cell1 = nw.insertCell(0);
-            var cell2 = nw.insertCell(1);
+            var cell4 = newRow.insertCell(3);
+            cell1.innerHTML = name;
+            cell2.innerHTML = amount + " dollars";
+            cell3.innerHTML = category;
+            cell4.innerHTML = date;
+        }
 
-            /*
-            const Arr = [
-                "2023-12-01",
-                "2023-12-05",
-                "2023-12-08",
-                "2023-12-15",
-                "2023-12-17",
-                "2023-12-21",
-            ];
-            cell1.innerHTML=parseFloat(add/samedates(Arr));
-            cell2.innerHTML=parseFloat(add/findSameWeekDates(Arr));
-            */
-            localStorage.setItem("food", food);
-            localStorage.setItem("enter", enter);
-            localStorage.setItem("house", house);
-            localStorage.setItem("trans", trans);
-            localStorage.setItem("util", util);
-            
+        function updateTable() {
+            var table = document.getElementById('dataTable');
+            table.innerHTML = "<thead><tr><th>Description</th><th>Amount</th><th>Category</th><th>Date</th></tr></thead>";
 
-        </script>
-    </body>
+            for (var i = 0; i < myArray.length; i++) {
+                addRowToTable(myArray[i].description, myArray[i].amount, myArray[i].category, myArray[i].transactionDate);
+            }
+        }
+
+        updateTable();
+        console.log(myArray);
+        add=0;
+        food=0;
+        enter=0;
+        house=0;
+        trans=0;
+        util=0;
+        local=[];
+        for (var i = 0; i < myArray.length; i++) {
+            //addRowToTable(myArray[i]["description"], myArray[i]["amount"], myArray[i]["category"], myArray[i]["transactionDate"]);
+            add+=Number(myArray[i]["amount"]);
+            local.push(myArray[i]["transactionDate"]);
+            if(myArray[i]["category"]=="food"){
+                food+=Number(myArray[i]["amount"]);
+            }
+            if(myArray[i]["category"]=="housing"){
+                house+=Number(myArray[i]["amount"]);
+            }
+            if(myArray[i]["category"]=="transportation"){
+                trans+=Number(myArray[i]["amount"]);
+            }
+            if(myArray[i]["category"]=="utilities"){
+                util+=Number(myArray[i]["amount"]);
+            }
+            if(myArray[i]["category"]=="entertainment"){
+                enter+=Number(myArray[i]["amount"]);
+            }
+        }
+        function samedates(Array){
+            const same = [];
+            let counter=0;
+            Array.forEach(dateStr => {
+                const dateObj = new Date(dateStr);
+                const year = dateObj.getFullYear();
+                const month = dateObj.getMonth() + 1; 
+                const day = dateObj.getDate();
+                const dateKey = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+                bool=true;
+                for (let i = 0; i < same.length; i++) {
+                    if(dateKey==same[i]){
+                        bool=false;
+                    }
+                }
+                if(bool){
+                    same.push(dateKey);
+                    counter+=1;
+                }
+            });
+
+            return counter;
+        }
+        function findSameWeekDates(dateArray) {
+            const group = [];
+            let counter=0;
+
+            dateArray.forEach(date=> {
+                const dateObj = new Date(date);
+                const year = dateObj.getFullYear();
+                const weekNum = getWeekNum(dateObj);
+                const weekKey = `${year}-W${weekNum< 10 ? '0' : ''}${weekNum}`;
+                bool=true;
+                for (let i = 0; i < group.length; i++) {
+                    if(weekKey==group[i]){
+                        bool=false;
+                    }
+                }
+                if(bool){
+                    group.push(weekKey)
+                    counter+=1
+                }
+            });
+
+            return counter;
+        }
+
+        function getWeekNum(date) {
+            const target = new Date(date.valueOf());
+            const dayNumber = (date.getDay() + 6) % 7;
+            target.setDate(target.getDate() - dayNumber + 3);
+            const firstThursday = target.valueOf();
+            target.setMonth(0, 1);
+            if (target.getDay() !== 4) {
+                target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);
+            }
+            return 1 + Math.ceil((firstThursday - target) / 604800000);
+        }
+        var table = document.getElementById('all');
+        var newRow = table.insertRow(table.rows.length);
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3)
+        var cell5 = newRow.insertCell(4);
+        var cell6 = newRow.insertCell(5);
+        cell1.innerHTML = add+" dollars";
+        cell2.innerHTML = parseFloat(food/add);
+        cell3.innerHTML = parseFloat(enter/add);
+        cell4.innerHTML = parseFloat(house/add);
+        cell5.innerHTML = parseFloat(trans/add);
+        cell6.innerHTML = parseFloat(util/add);
+        var t=document.getElementById('two');
+        var nw=t.insertRow(t.rows.length);
+        var cell1 = nw.insertCell(0);
+        var cell2 = nw.insertCell(1);
+        cell1.innerHTML=parseFloat(add/samedates(local));
+        cell2.innerHTML=parseFloat(add/findSameWeekDates(local));
+        
+        localStorage.setItem("food", food);
+        localStorage.setItem("enter", enter);
+        localStorage.setItem("house", house);
+        localStorage.setItem("trans", trans);
+        localStorage.setItem("util", util);
+        
+    </script>
+
+</body>
 </html>

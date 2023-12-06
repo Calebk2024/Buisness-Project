@@ -84,6 +84,8 @@
                 cell3.innerHTML = category;
                 cell4.innerHTML=date;
             }
+            var oh=localStorage.getItem("b");
+            console.log(oh);
             var name = localStorage.getItem("description");
             var amount = localStorage.getItem("amount");
             var category = localStorage.getItem("category");
@@ -121,7 +123,7 @@
                 }
             }
             function samedates(Array){
-                const sameDayDates = [];
+                const same = [];
                 let counter=0;
                 Array.forEach(dateStr => {
                     const dateObj = new Date(dateStr);
@@ -130,13 +132,13 @@
                     const day = dateObj.getDate();
                     const dateKey = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
                     bool=true;
-                    for (let i = 0; i < sameDayDates.length; i++) {
-                        if(dateKey==sameDayDates[i]){
+                    for (let i = 0; i < same.length; i++) {
+                        if(dateKey==same[i]){
                             bool=false;
                         }
                     }
                     if(bool){
-                        sameDayDates.push(dateKey);
+                        same.push(dateKey);
                         counter+=1;
                     }
                 });
@@ -144,23 +146,22 @@
                 return counter;
             }
             function findSameWeekDates(dateArray) {
-                const groupedByWeek = [];
+                const group = [];
                 let counter=0;
 
-                dateArray.forEach(dateStr => {
-                    const dateObj = new Date(dateStr);
+                dateArray.forEach(date=> {
+                    const dateObj = new Date(date);
                     const year = dateObj.getFullYear();
-                    const weekNumber = getWeekNumber(dateObj);
-                    const weekKey = `${year}-W${weekNumber < 10 ? '0' : ''}${weekNumber}`;
-
+                    const weekNum = getWeekNum(dateObj);
+                    const weekKey = `${year}-W${weekNum< 10 ? '0' : ''}${weekNum}`;
                     bool=true;
-                    for (let i = 0; i < groupedByWeek.length; i++) {
-                        if(weekKey==groupedByWeek[i]){
+                    for (let i = 0; i < group.length; i++) {
+                        if(weekKey==group[i]){
                             bool=false;
                         }
                     }
                     if(bool){
-                        groupedByWeek.push(weekKey)
+                        group.push(weekKey)
                         counter+=1
                     }
                 });
@@ -168,7 +169,7 @@
                 return counter;
             }
 
-            function getWeekNumber(date) {
+            function getWeekNum(date) {
                 const target = new Date(date.valueOf());
                 const dayNumber = (date.getDay() + 6) % 7;
                 target.setDate(target.getDate() - dayNumber + 3);
@@ -197,8 +198,6 @@
             var nw=t.insertRow(t.rows.length);
             var cell1 = nw.insertCell(0);
             var cell2 = nw.insertCell(1);
-
-            
             cell1.innerHTML=parseFloat(add/samedates(local));
             cell2.innerHTML=parseFloat(add/findSameWeekDates(local));
             

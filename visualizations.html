@@ -30,11 +30,31 @@
 <div id="expense-chart"></div>
 
 <script>
-    var food = localStorage.getItem("food");
-    var enter= localStorage.getItem("enter");
-    var house = localStorage.getItem("house");
-    var trans=localStorage.getItem('trans');
-    var util=localStorage.getItem("util");
+    var food = 0;
+    var enter= 0;
+    var house = 0;
+    var trans=0;
+    var util=0;
+    var myArray = JSON.parse(localStorage.getItem("myArray")) || [];
+    console.log(myArray);
+    for (var i = 0; i < myArray.length; i++){
+        if(myArray[i]["category"]=="food"){
+            food+=parseFloat(myArray[i]["amount"]);
+        }
+        if(myArray[i]["category"]=="housing"){
+            house+=parseFloat(myArray[i]["amount"]);
+        }
+        if(myArray[i]["category"]=="transportation"){
+            trans+=parseFloat(myArray[i]["amount"]);
+        }
+        if(myArray[i]["category"]=="utilities"){
+            util+=parseFloat(myArray[i]["amount"]);
+        }
+        if(myArray[i]["category"]=="entertainment"){
+            enter+=parseFloat(myArray[i]["amount"]);
+        }
+    }
+    console.log(food);
     const expenses = [
         { category: 'Food', amount: food},
         { category: 'Transportation', amount: enter},
