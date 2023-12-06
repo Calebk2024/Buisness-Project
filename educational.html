@@ -37,23 +37,21 @@
             color: white;
             text-align: center;
             padding: 1em;
+            border:2px solid black;
 
-            /* Set initial opacity to 0 for the fade-in effect */
             opacity: 0;
-
-            /* Apply the fade-in animation to the header */
-            animation: fadeIn 1s ease-in-out forwards;
+            transform: scale(0);
+            animation: fadeInScale 1s ease-in-out forwards;
         }
 
-        /* Define the keyframes for the fade-in animation */
-        @keyframes fadeIn {
+        @keyframes fadeInScale {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: scale(0);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: scale(1);
             }
         }
 
@@ -63,12 +61,20 @@
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            
-            /* Set initial opacity to 0 for the fade-in effect */
+
             opacity: 0;
-            
-            /* Apply the fade-in animation to the sections */
             animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         h2 {
