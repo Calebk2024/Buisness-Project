@@ -59,12 +59,19 @@
             background-color: #4CAF50;
             color: white;
             padding: 10px 15px;
-            border:1.5px solid black;
+            border: 1.5px solid black;
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
         button:hover {
             background-color: #45a049;
+            transform: scale(1.1);
+        }
+
+        button.clicked {
+            background-color: lightblue;
+            transform: scale(0.9);
         }
     </style>
 </head>
@@ -83,7 +90,7 @@
             <label for="monthlyBudget">Set Monthly Budget:</label>
             <input type="number" id="monthlyBudget" placeholder="Enter amount" required>
 
-            <button type="button" onclick="handleBudgetForm()">Save Budget</button>
+            <button type="button" onclick="handleBudgetForm()" onmousedown="buttonClick()" onmouseup="buttonRelease()">Save Budget</button>
         </form>
     </main>
 
@@ -124,6 +131,16 @@
             budgetFormInstance.handleForm();
 
             alert(`Weekly Budget: $${budgetInstance.weeklyBudget}\nMonthly Budget: $${budgetInstance.monthlyBudget}`);
+        }
+
+        function buttonClick() {
+            const button = document.querySelector('button');
+            button.classList.add('clicked');
+        }
+
+        function buttonRelease() {
+            const button = document.querySelector('button');
+            button.classList.remove('clicked');
         }
     </script>
 
