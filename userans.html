@@ -7,6 +7,7 @@
         }
         h2 {
             color: black;
+            margin-top:60px;
         }
         table {
             width: 100%;
@@ -24,6 +25,10 @@
         nav {
             background-color: black;
             overflow: hidden;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
         }
         nav a {
             float: left;
@@ -77,7 +82,6 @@
             </tr>
         </thead>
     </table>
-    <div id="result"></div>
 
     <script>
         var myArray = JSON.parse(localStorage.getItem("myArray")) || [];
@@ -212,25 +216,6 @@
         localStorage.setItem("util", util);
         var wBudget=localStorage.getItem("weekbudget");
         var mBudget=localStorage.getItem("monthbudget");
-        var avgfood= 0.128;
-        var avgtrans=0.168;
-        var avghouse=0.333;
-        var avgenter=0.047;
-        var avgutil=0.33;
-        var avgother=0.041;
-        if(0.1<parseFloat(food/add)&&parseFloat(food/add)<0.2){
-            if(0.1<parseFloat(trans/add)&&parseFloat(trans/add)<0.2){
-                if(0.3<parseFloat(house/add)&&parseFloat(house/add)<0.4){
-                    if(0.01<parseFloat(enter/add)&&parseFloat(enter/add)<0.1){
-                        if(0.3<parseFloat(util/add)&&parseFloat(util/add)<0.4){
-                            if(0.01<parseFloat(/add)&&parseFloat(/add)<0.1){
-
-                            }
-                        }
-                    }
-                }
-            }
-        }
         function budget(){
             var weekcounter=0;
             var monthcounter=0;
@@ -267,8 +252,6 @@
             });
         }
         budget();
-        
-
     </script>
 </body>
 </html>
