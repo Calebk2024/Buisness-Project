@@ -1,5 +1,9 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Log</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -35,6 +39,27 @@
             box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 4px;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        input:hover {
+            border-color: #45a049;
+            transform: scale(1.02);
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        select:hover {
+            border-color: #45a049;
+            transform: scale(1.02);
         }
 
         nav {
@@ -56,30 +81,25 @@
             color: blue;
         }
 
-        button {
+        button, input[type="submit"] {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 15px;
-            border:1.5px solid black;
+            padding: 10px 20px;
+            border: 1.5px solid black;
             cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        button:hover {
+        button:hover, input[type="submit"]:hover {
             background-color: #45a049;
+            transform: scale(1.05);
         }
 
-        input[type="submit"] {
-            background-color: #4CAF50; 
-            color: white; 
-            padding: 10px 20px; 
-            border: 1.5px solid black;; 
-            cursor: pointer; 
-            font-size: 16px; 
+        button.clicked, input[type="submit"].clicked, #myButton.clicked {
+            background-color: lightblue;
+            transform: scale(0.9);
         }
 
-        input[type="submit"]:hover {
-            background-color: #45a049; 
-        }
     </style>
 </head>
 <body>
@@ -110,8 +130,8 @@
         <input type="date" id="birthdate" name="birthdate">
         <input type="submit" onclick="logExpense()">
     </form>
-    <button type="button" id="myButton">Clear Expenses</button>
 
+    <button type="button" id="myButton">Clear Expenses</button>
 
     <script>
         function logExpense() {
@@ -122,7 +142,7 @@
             const category = document.getElementById('category').value;
             const transactionDate = document.getElementById('birthdate').value;
 
-            if (description === "" || amount === "" || category === "" || transactionDate === ""||amount==="0") {
+            if (description === "" || amount === "" || category === "" || transactionDate === "" || amount === "0") {
                 alert('Please enter all fields');
                 return;
             }
@@ -130,16 +150,17 @@
             myArray.push({ description, amount, category, transactionDate });
             console.log(myArray);
             localStorage.setItem("myArray", JSON.stringify(myArray));
-            window.location.href= "userans.html";
+            window.location.href = "userans.html";
             document.getElementById('description').value = '';
             document.getElementById('amount').value = '';
             document.getElementById('category').value = '';
             document.getElementById('birthdate').value = '';
         }
-        document.addEventListener('DOMContentLoaded', function() {
+
+        document.addEventListener('DOMContentLoaded', function () {
             var myButton = document.getElementById('myButton');
 
-            myButton.addEventListener('click', function() {
+            myButton.addEventListener('click', function () {
                 alert('Expenses have been cleared');
                 localStorage.setItem("description", 0);
                 localStorage.setItem("amount", 0);
@@ -154,7 +175,6 @@
             });
         });
         
-            
     </script>
 
 </body>
