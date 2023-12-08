@@ -1,46 +1,38 @@
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
-
         h2 {
-            color: #333;
+            color: black;
         }
-
         table {
-            border-collapse: collapse;
             width: 100%;
             margin-top: 20px;
+            border-collapse: collapse;
         }
-
         th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+            border: 1px solid rgb(52, 46, 46);
+            padding: 7px;
             text-align: left;
         }
-
         th {
-            background-color: #f2f2f2;
+            background-color:white;
         }
         nav {
-                background-color: #333;
-                overflow: hidden;
+            background-color: black;
+            overflow: hidden;
         }
-    
         nav a {
             float: left;
             display: block;
-            color: #fff;
+            color: white;
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
         }
-    
         nav a:hover {
             background-color: #ddd;
             color:blue;
@@ -100,18 +92,14 @@
             cell3.innerHTML = category;
             cell4.innerHTML = date;
         }
-
         function updateTable() {
             var table = document.getElementById('dataTable');
-            table.innerHTML = "<thead><tr><th>Description</th><th>Amount</th><th>Category</th><th>Date</th></tr></thead>";
-
+            
             for (var i = 0; i < myArray.length; i++) {
                 addRowToTable(myArray[i].description, myArray[i].amount, myArray[i].category, myArray[i].transactionDate);
             }
         }
-
         updateTable();
-        console.log(myArray);
         add=0;
         food=0;
         enter=0;
@@ -120,7 +108,6 @@
         util=0;
         local=[];
         for (var i = 0; i < myArray.length; i++) {
-            //addRowToTable(myArray[i]["description"], myArray[i]["amount"], myArray[i]["category"], myArray[i]["transactionDate"]);
             add+=Number(myArray[i]["amount"]);
             local.push(myArray[i]["transactionDate"]);
             if(myArray[i]["category"]=="food"){
@@ -144,6 +131,7 @@
             let counter=0;
             Array.forEach(dateStr => {
                 const dateObj = new Date(dateStr);
+                dateObj.setDate(dateObj.getDate() + 1);
                 const year = dateObj.getFullYear();
                 const month = dateObj.getMonth() + 1; 
                 const day = dateObj.getDate();
@@ -159,19 +147,19 @@
                     counter+=1;
                 }
             });
-
             return counter;
+            
         }
-        function findSameWeekDates(dateArray) {
+        function sameweek(dateArray) {
             const group = [];
             let counter=0;
-
             dateArray.forEach(date=> {
                 const dateObj = new Date(date);
+                dateObj.setDate(dateObj.getDate() + 1);
+                
                 const year = dateObj.getFullYear();
-                const weekNum = getWeekNum(dateObj);
+                const weekNum = getWeek(dateObj)-1;
                 const weekKey = `${year}-W${weekNum< 10 ? '0' : ''}${weekNum}`;
-                console.log(weekKey);
                 bool=true;
                 for (let i = 0; i < group.length; i++) {
                     if(weekKey==group[i]){
@@ -183,24 +171,19 @@
                     counter+=1
                 }
             });
-
             return counter;
         }
-        
-        function getWeekNum(date) {
+        function getWeek(date) {
             const target = new Date(date.valueOf());
-            const dayNumber = (date.getDay() + 8) % 7;
-            target.setDate(target.getDate() - dayNumber + 3);
-            
-            const firstThursday = target.valueOf();
+            const day = (date.getDay() + 7) % 7;
+            target.setDate(target.getDate() - day + 3);
+            const first = target.valueOf();
             target.setMonth(0, 1);
             if (target.getDay() !== 0) {
                 target.setMonth(0, 1 + ((0 - target.getDay()) + 7) % 7);
             }
-            console.log(target);
-            return 1 + Math.ceil((firstThursday - target) / 604800000);
+            return 1 + Math.ceil((first - target) / 604800000);
         }
-        
         var table = document.getElementById('all');
         var newRow = table.insertRow(table.rows.length);
         var cell1 = newRow.insertCell(0);
@@ -220,15 +203,50 @@
         var cell1 = nw.insertCell(0);
         var cell2 = nw.insertCell(1);
         cell1.innerHTML=parseFloat(add/samedates(local));
-        cell2.innerHTML=parseFloat(add/findSameWeekDates(local));
-        
+        cell2.innerHTML=parseFloat(add/sameweek(local));
         localStorage.setItem("food", food);
         localStorage.setItem("enter", enter);
         localStorage.setItem("house", house);
         localStorage.setItem("trans", trans);
         localStorage.setItem("util", util);
-        
+        var wBudget=localStorage.getItem("weekbudget");
+        var mBudget=localStorage.getItem("monthbudget");
+        function budget(){
+            var weekcounter=0;
+            var monthcounter=0;
+            weekArray={};
+            monthArray={};
+            myArray.forEach((t)=> {
+                var am=t.amount;
+                var tr=t.transactionDate;
+                var obj = new Date(tr);
+                obj.setDate(obj.getDate() + 1);
+                key=getWeek(obj)-1;
+                key2=obj.getMonth()+1;
+                if(weekArray[key]){
+                    weekArray[key]+=parseFloat(am);
+                }
+                else{
+                    weekArray[key]=parseFloat(am);
+                }
+                if(monthArray[key2]){
+                    monthArray[key2]+=parseFloat(am);
+                }
+                else{
+                    monthArray[key2]=parseFloat(am);
+                }
+                
+                if(weekArray[key]>parseFloat(wBudget)&&weekcounter==0){
+                    alert("You have exceeded your weekly budget for week "+key);
+                    weekcounter+=1
+                }
+                if(monthArray[key2]>parseFloat(mBudget)&&monthcounter==0){
+                    alert("You have exceeded your monthly budget for month "+key2);
+                    monthcounter+=1
+                }
+            });
+        }
+        budget();
     </script>
-
 </body>
 </html>

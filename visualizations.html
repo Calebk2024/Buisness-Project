@@ -7,18 +7,18 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: white;
             text-align: center;
         }
         nav {
-            background-color: #333;
+            background-color: black;
             overflow: hidden;
         }
     
         nav a {
             float: left;
             display: block;
-            color: #fff;
+            color: white;
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
@@ -62,7 +62,6 @@
             enter+=parseFloat(myArray[i]["amount"]);
         }
     }
-    console.log(food);
     const expenses = [
         { category: 'Food', amount: food},
         { category: 'Transportation', amount: enter},
@@ -78,13 +77,13 @@
         x: categories,
         y: amounts,
         marker: {
-            color: "rgb(50,40,30)",
+            color: "rgb(0,0,0)",
             opacity: 0.7,
         }
     }];
 
     const layout = {
-        title: 'Expense Tracker',
+        title: 'Expense Tracked per Category',
         xaxis: { title: 'Expense Category' },
         yaxis: { title: 'Expense Amount ($)'}
     };

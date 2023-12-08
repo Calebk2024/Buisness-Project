@@ -4,7 +4,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: white;
             text-align: center;
         }
 
@@ -16,28 +16,24 @@
         form {
             max-width: 300px;
             margin: 20px auto;
-            background-color: #c7a6a6;
+            background-color: #c5a8a8;
             padding: 20px;
             border-radius: 6px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
         label {
             font-weight: bold;
         }
-
         input,
         select {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
             box-sizing: border-box;
-            border: 1px solid #ccc;
+            border: 1px solid #b3a8a8;
             border-radius: 3px;
         }
-
         nav {
-            background-color: #333;
+            background-color:black;
             overflow: hidden;
         }
 
@@ -56,7 +52,7 @@
         }
 
         button {
-            background-color: #4CAF50;
+            background-color: #52a1b3;
             color: white;
             padding: 10px 15px;
             border:1.5px solid black;
@@ -64,25 +60,23 @@
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #45a080;
         }
 
         input[type="submit"] {
-            background-color: #4CAF50; 
+            background-color: #68af4c; 
             color: white; 
             padding: 10px 20px; 
             border: 1.5px solid black;; 
             cursor: pointer; 
             font-size: 16px; 
         }
-
         input[type="submit"]:hover {
-            background-color: #45a049; 
+            background-color: #45a07d; 
         }
     </style>
 </head>
 <body>
-
     <nav>
         <a href="index.html">Back to homepage</a>
     </nav>
@@ -115,17 +109,14 @@
     <script>
         function logExpense() {
             var myArray = JSON.parse(localStorage.getItem("myArray")) || [];
-
             const description = document.getElementById('description').value;
             const amount = document.getElementById('amount').value;
             const category = document.getElementById('category').value;
             const transactionDate = document.getElementById('birthdate').value;
-
             if (description === "" || amount === "" || category === "" || transactionDate === ""||amount==="0") {
                 alert('Please enter all fields');
                 return;
             }
-
             myArray.push({ description, amount, category, transactionDate });
             console.log(myArray);
             localStorage.setItem("myArray", JSON.stringify(myArray));
@@ -137,7 +128,6 @@
         }
         document.addEventListener('DOMContentLoaded', function() {
             var myButton = document.getElementById('myButton');
-
             myButton.addEventListener('click', function() {
                 alert('Expenses have been cleared');
                 localStorage.setItem("description", 0);
@@ -151,9 +141,7 @@
                 localStorage.setItem("util", 0);
                 localStorage.setItem("myArray", JSON.stringify([]));
             });
-        });
-        
-            
+        });  
     </script>
 
 </body>
