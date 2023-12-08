@@ -129,7 +129,8 @@
 
         function handleBudgetForm() {
             budgetFormInstance.handleForm();
-
+            localStorage.setItem("weekbudget", budgetInstance.weeklyBudget);
+            localStorage.setItem("monthbudget", budgetInstance.monthlyBudget);
             alert(`Weekly Budget: $${budgetInstance.weeklyBudget}\nMonthly Budget: $${budgetInstance.monthlyBudget}`);
         }
 
