@@ -13,7 +13,7 @@
         }
 
         nav {
-            background-color: #333;
+            background-color: black;
             overflow: hidden;
         }
 
@@ -35,7 +35,7 @@
             padding: 20px;
             background-color: #fff;
             margin: 20px;
-            border-radius: 8px;
+            border: 1.5px solid black;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -49,10 +49,16 @@
         }
 
         input {
-            width: 100%;
+            width: 98%;
             padding: 8px;
             margin-bottom: 16px;
-            box-sizing: border-box;
+            border: 1.5px solid black;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        input:hover {
+            border-color: #45a049;
+            transform: scale(1.02);
         }
 
         button {
@@ -70,9 +76,9 @@
         }
 
         button.clicked {
-            background-color: lightblue;
             transform: scale(0.9);
         }
+        
     </style>
 </head>
 <body>
