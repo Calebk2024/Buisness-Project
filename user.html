@@ -6,6 +6,7 @@
     <title>Expense Log</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: white;
@@ -14,7 +15,7 @@
 
         h1 {
             text-align: center;
-            color: rgb(149, 137, 137)aaa;
+            color: black;
         }
 
         form {
@@ -22,22 +23,31 @@
             margin: 20px auto;
             background-color: #c5a8a8;
             padding: 20px;
-            border-radius: 6px;
+            border:2px solid black;
         }
+
         label {
             font-weight: bold;
         }
+
         input,
         select {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
             box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            border: 1.5px solid black;
+            transition: border-color 0.3s ease, transform 0.3s ease;
         }
+
+        input:hover,
+        select:hover {
+            border-color: #45a049;
+            transform: scale(1.03);
+        }
+
         nav {
-            background-color:black;
+            background-color: black;
             overflow: hidden;
         }
 
@@ -66,6 +76,7 @@
 
         button:hover {
             background-color: #45a049;
+            transform: scale(1.05);
         }
 
         input[type="submit"] {
@@ -121,7 +132,7 @@
             const category = document.getElementById('category').value;
             const transactionDate = document.getElementById('birthdate').value;
 
-            if (description === "" || amount === "" || category === "" || transactionDate === ""||amount==="0") {
+            if (description === "" || amount === "" || category === "" || transactionDate === "" || amount === "0") {
                 alert('Please enter all fields');
                 return;
             }
@@ -152,9 +163,6 @@
                 localStorage.setItem("myArray", JSON.stringify([]));
             });
         });
-        
-            
     </script>
-
 </body>
 </html>
