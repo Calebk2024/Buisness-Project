@@ -37,6 +37,18 @@
             background-color: #ddd;
             color:blue;
         }
+        div#result{
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            border: 2px solid #999; /* Set the border properties */
+            padding: 20px; /* Add padding inside the border if desired */
+            margin: 0 auto; /* Center the div horizontally */
+            width: 80%; /* Set the width of the div */
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            color: #333;
+            margin: 20px auto 0;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -223,13 +235,14 @@
                 if(0.3<parseFloat(house/add)&&parseFloat(house/add)<0.4){
                     if(0.01<parseFloat(enter/add)&&parseFloat(enter/add)<0.1){
                         if(0.3<parseFloat(util/add)&&parseFloat(util/add)<0.4){
-                            if(0.01<parseFloat(/add)&&parseFloat(/add)<0.1){
-
-                            }
+                            document.getElementById('result').innerHTML="Based on average US citizen statistics your expense catagories are average";
                         }
                     }
                 }
             }
+        }
+        else{
+            document.getElementById('result').innerHTML="Based on average US citizen statistics your expense catagories are not average";
         }
         function budget(){
             var weekcounter=0;
