@@ -1,0 +1,238 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            height: 100%;
+            margin: 0;
+        }
+        #chart {
+            width: 45%; 
+            height: 50%;
+            display: inline-block;
+            margin: 20px;
+        }
+        #bar{
+            margin:10px;
+        }
+        #title{
+            text-align:center;
+        }
+        input{
+            border:solid black; 
+        }
+        
+        form {
+            display: inline-block;
+            margin-top:40px;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 1.5px solid black;
+            border-radius: 5px;
+            background-color: white;
+            font:black;
+        }
+        #container {
+            text-align: center;
+        }
+        #R{
+            display:none;
+            background-color:#45a049;
+            color:white;
+        }
+        #S{
+            background-color:#45a049;
+            color:white;
+        }
+        label {
+            font-weight: bold;
+        }
+        #profit {
+            display:none;
+            width: 60%;
+            margin: 20px auto;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            box-sizing: border-box;
+            border: 1.5px solid black;
+            color: #333;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">
+        User Expense Categorical Breakdown
+    </h1>
+    <div id="chart">
+        User Catogorical Expense Percentages
+        <canvas id="PieChart"></canvas>
+        <script>
+            if(localStorage.getItem("fpercent")+ localStorage.getItem("epercent")+localStorage.getItem("hpercent")+localStorage.getItem("tpercent")+ localStorage.getItem("upercent")+localStorage.getItem("opercent")==0){
+                alert("User has not logged any expenses")
+            }
+            var data = {
+                labels: ["Food", "Entertainment", "Housing", "Transporation", "Utilities", "Other"],
+                datasets: [{
+                    data: [localStorage.getItem("fpercent"), localStorage.getItem("epercent"), localStorage.getItem("hpercent"),localStorage.getItem("tpercent"), 
+                    localStorage.getItem("upercent"),localStorage.getItem("opercent")],
+                    backgroundColor: ["blue", "black", "purple", "yellow", "red", "orange"]
+                }]
+            };
+            var c = document.getElementById("PieChart").getContext('2d');
+            var pie = new Chart(c, {
+                type: 'pie',
+                data: data,
+                options: {
+                    animation: {
+                        animateRotate: true,
+                        animateScale: true,
+                        duration: 4000
+                    }
+                }
+            }); 
+        </script>
+    </div>
+    <div id="chart">
+        Average American Annual User Categorical Percentages 2022(Per US Bureau of Labor Statistics)
+        <canvas id="PieChart2"></canvas>
+        <script>
+            var data2 = {
+                labels: ["Food", "Entertainment", "Housing", "Transporation", "Utilities", "Other"],
+                datasets: [{
+                    data: [12.8, 4.7, 33.33, 16.8, 33.33, 4.1],
+                    backgroundColor: ["blue", "black", "purple", "yellow", "red", "orange"]
+                }]
+            };
+            var c2 = document.getElementById("PieChart2").getContext('2d');
+            var pie= new Chart(c2, {
+                type: 'pie',
+                data: data2,
+                options: {
+                    animation: {
+                        animateRotate: true,
+                        animateScale: true,
+                        duration:4000
+                    }
+                }
+            });   
+        </script>
+    </div>
+    <div id="container">
+        <form>
+            Estimated Monthly Income in US $(after tax):
+            <input type ="number" id="input">
+            <input type="button" id="S" value="Submit" onclick="my()">
+            <input type="button" id="R" value="Reset" onclick="by()">
+        </form>
+    </div>
+    <div id="bar">
+        <canvas id="BarChart"></canvas>
+        <script>
+            function my(){
+                document.getElementById("S").style.display="none";
+                document.getElementById("R").style.display="inline-block";
+                var canvas = document.createElement("canvas");
+                canvas.id = "BarChart";
+                canvas.width = 400;
+                canvas.height = 200;
+                document.getElementById("bar").appendChild(canvas);
+                var ir= document.getElementById("input").value;
+                if(parseFloat(ir)<0){
+                    document.getElementById("R").style.display="none";
+                    document.getElementById("S").style.display="inline-block";
+                    alert('Please enter a positive US $ Amount');
+                    document.getElementById("input").value="";
+                    return;
+                }
+                a= JSON.parse(localStorage.getItem("myArray")) || [];
+                var arr=[];
+                arr.push({"01":0});
+                arr.push({"02":0});
+                arr.push({"03":0});
+                arr.push({"04":0});
+                arr.push({"05":0});
+                arr.push({"06":0});
+                arr.push({"07":0});
+                arr.push({"08":0});
+                arr.push({"09":0});
+                arr.push({"10":0});
+                arr.push({"11":0});
+                arr.push({"12":0});
+                for(var i=0; i<a.length; i++){
+                    month=a[i]["transactionDate"].substring(5,7);
+                    var index = arr.findIndex(item => item[month]);
+                    for(var j=0; j<arr.length; j++){
+                        if(month in arr[j]){
+                            value=parseInt(arr[j][month])+parseInt((a[i]["amount"]));
+                            arr[j][month]=value;
+                        }
+                    }
+                }
+                var data = {
+                    labels: ["January", "Febuary", "March", "April", "May", "June", "July", "August",
+                "September", "October", "November", "December"],
+                    datasets: [{
+                        label:"Income",
+                        data: [parseFloat(ir), parseFloat(ir),parseFloat(ir),parseFloat(ir),parseFloat(ir),parseFloat(ir),parseFloat(ir),
+                        parseFloat(ir),parseFloat(ir),parseFloat(ir),parseFloat(ir),parseFloat(ir)],
+                        backgroundColor:"blue"
+                    },
+                    {
+                        label:"Expenses",
+                        data:[arr[0]["01"],arr[1]["02"],arr[2]["03"], arr[3]["04"], arr[4]["05"], arr[5]["06"],
+                        arr[6]["07"],arr[7]["08"], arr[8]["09"], arr[9]["10"], arr[10]["11"], arr[11]["12"]],
+                        backgroundColor:"red"
+                    },]        
+                };
+                console.log(arr);
+                var c = document.getElementById("BarChart").getContext('2d');
+                var options = {
+                    scales: {
+                        y: {
+                        beginAtZero: true,
+                        }
+                    }
+                };
+                var bar = new Chart(c, {
+                    type: 'bar',
+                    data: data,
+                    options: {
+                        animation: {
+                            animateRotate: true,
+                            animateScale: true,
+                            duration: 4000
+                        }
+                    }
+                });
+                var sum=0;
+                for (var index of arr) {
+                    for (var key in index) {
+                        for(var value in key){
+                            sum+=parseFloat(ir)-value;
+                        }
+
+                    }
+                }
+                document.getElementById("profit").style.display="block";
+                console.log(sum);
+                document.getElementById("profit").innerHTML="Your average monthly profit is "+sum/12.0+" $"; 
+            } 
+            function by(){
+                document.getElementById("profit").style.display="none";
+                document.getElementById("R").style.display="none";
+                document.getElementById("S").style.display="inline-block";
+                var canvas = document.getElementById("BarChart");
+                canvas.parentNode.removeChild(canvas);
+                document.getElementById("input").value="";
+            }
+            
+        </script>
+    </div>
+    <div id="profit">
+        
+    </div>
+</body>
+</html>

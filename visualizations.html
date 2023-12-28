@@ -1,4 +1,5 @@
 <html>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 <head>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <title>Expense Tracker</title>
@@ -43,6 +44,7 @@
     var house = 0;
     var trans=0;
     var util=0;
+    var o=0;
     var myArray = JSON.parse(localStorage.getItem("myArray")) || [];
     console.log(myArray);
     for (var i = 0; i < myArray.length; i++){
@@ -61,13 +63,17 @@
         if(myArray[i]["category"]=="entertainment"){
             enter+=parseFloat(myArray[i]["amount"]);
         }
+        if(myArray[i]["category"]=="other"){
+            o+=parseFloat(myArray[i]["amount"]);
+        }
     }
     const expenses = [
         { category: 'Food', amount: food},
-        { category: 'Transportation', amount: enter},
-        { category: 'Entertainment', amount: house },
-        { category: 'Utilities', amount: trans },
-        { category: 'Housing', amount: util }
+        { category: 'Transportation', amount: trans},
+        { category: 'Entertainment', amount: enter},
+        { category: 'Utilities', amount: util },
+        { category: 'Housing', amount: house },
+        { category: 'Other', amount:o}
     ];
     const categories = expenses.map(expense => expense.category);
     const amounts = expenses.map(expense => expense.amount);

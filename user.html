@@ -21,7 +21,7 @@
         form {
             max-width: 300px;
             margin: 20px auto;
-            background-color: #c5a8a8;
+            background-color: white;
             padding: 20px;
             border: 2px solid black;
         }
@@ -104,7 +104,7 @@
         <label for="description">Description:</label>
         <input type="text" id="description" name="description" required>
 
-        <label for="amount">Amount: (dollars)</label>
+        <label for="amount">Amount: (US $)</label>
         <input type="number" id="amount" name="amount" step=".01" required>
 
         <label for="category">Category:</label>
@@ -114,6 +114,7 @@
             <option value="transportation">Transportation</option>
             <option value="utilities">Utilities</option>
             <option value="entertainment">Entertainment</option>
+            <option value="other">Other</option>
         </select>
 
         <label for="birthdate">Select the date of transaction:</label>
@@ -126,7 +127,7 @@
     <script>
         class ExpenseLogger {
             constructor() {
-                this.expenseArray = [];
+                this.expenseArray = JSON.parse(localStorage.getItem("myArray")) || [];
             }
 
             logExpense(description, amount, category, transactionDate) {
@@ -145,6 +146,12 @@
 
             updateLocalStorage() {
                 localStorage.setItem("myArray", JSON.stringify(this.expenseArray));
+                localStorage.setItem("fpercent", 0);
+                localStorage.setItem("tpercent", 0);
+                localStorage.setItem("hpercent", 0);
+                localStorage.setItem("opercent", 0);
+                localStorage.setItem("upercent", 0);
+                localStorage.setItem("epercent", 0);
             }
 
             clearForm() {
@@ -168,12 +175,16 @@
             expenseForm.addEventListener('submit', function (event) {
                 event.preventDefault();
                 const description = document.getElementById('description').value;
-                const amount = document.getElementById('amount').value;
+                const amount = parseFloat(document.getElementById('amount').value);
                 const category = document.getElementById('category').value;
                 const transactionDate = document.getElementById('birthdate').value;
 
                 if (description === "" || amount === "" || category === "" || transactionDate === "" || amount === "0") {
                     alert('Please enter all fields');
+                    return;
+                }
+                if(amount<1){
+                    alert('Please enter a amount above 0');
                     return;
                 }
 
