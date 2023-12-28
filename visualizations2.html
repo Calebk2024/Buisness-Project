@@ -1,4 +1,5 @@
 <html>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <head>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <title>Expense Made Each Day</title>
@@ -73,7 +74,8 @@
                 xaxis: {
                     title: 'Dates',
                     type: 'date',
-                    tickformat: '%Y-%m-%d',
+                    //tickformat: '%Y-%m-%d',
+                    tickformat:'%m-%d-%Y',
                     tickvals: dateObjects,
                     tickfont: {
                         color: 'black' 

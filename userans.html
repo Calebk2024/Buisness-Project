@@ -1,6 +1,8 @@
 <html>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 <head>
     <style>
+
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
@@ -8,9 +10,12 @@
         h2 {
             color: black;
             margin-top:60px;
+            text-align:center;
+            font-size:30px;
         }
         table {
             width: 100%;
+            height:20%;
             margin-top: 20px;
             border-collapse: collapse;
         }
@@ -43,26 +48,29 @@
             color:blue;
         }
         div#result{
-            box-sizing: border-box; /* Include padding and border in the element's total width and height */
-            border: 2px solid #999; /* Set the border properties */
-            padding: 20px; /* Add padding inside the border if desired */
-            margin: 0 auto; /* Center the div horizontally */
-            width: 80%; /* Set the width of the div */
+            box-sizing: border-box; 
+            border: 2px solid #999;
+            padding: 20px; 
+            margin: 0 auto;
+            width: 80%; 
             font-family: 'Arial', sans-serif;
             font-size: 16px;
             color: #333;
             margin: 20px auto 0;
             text-align: center;
         }
+        
+
     </style>
 </head>
 <body>
     <nav>
         <a href="index.html">Back to homepage</a>
         <a href="user.html">Back to user logging</a>
-        <a href="visualizations.html">Visualization graph</a>
-        <a href="visualizations2.html">Visualization graph 2</a>
+        <a href="visualizations.html">Categorial Expense Visualization</a>
+        <a href="visualizations2.html">Daily Expense Visualization</a>
     </nav>
+    
     <h2>Expense Table</h2>
     <table border="1" id="dataTable">
         <thead>
@@ -83,20 +91,22 @@
                 <th>Housing Percentage</th>
                 <th>Transportation Percentage</th>
                 <th>Utilities Percentage</th>
+                <th>Other Percentage</th>
             </tr>
         </thead>
     </table>
     <table border="1" id="two">
         <thead>
             <tr>
-                <th>Amount spent per day</th>
-                <th>Amount spent per week</th>
+                <th>Average amount spent per day</th>
+                <th>Average amount spent per week</th>
             </tr>
         </thead>
     </table>
 
     <script>
         var myArray = JSON.parse(localStorage.getItem("myArray")) || [];
+        console.log(myArray);
         function addRowToTable(name, amount, category, date) {
             var table = document.getElementById('dataTable');
             var newRow = table.insertRow(table.rows.length);
@@ -105,11 +115,12 @@
             var cell3 = newRow.insertCell(2);
             var cell4 = newRow.insertCell(3);
             cell1.innerHTML = name;
-            cell2.innerHTML = amount + " dollars";
+            cell2.innerHTML = amount + " $";
+            cell4.innerHTML=date.substring(5)+"-"+date.substring(0,4);
             cell3.innerHTML = category;
-            cell4.innerHTML = date;
         }
         function updateTable() {
+            
             var table = document.getElementById('dataTable');
             
             for (var i = 0; i < myArray.length; i++) {
@@ -124,6 +135,7 @@
         trans=0;
         util=0;
         local=[];
+        oth=0;
         for (var i = 0; i < myArray.length; i++) {
             add+=Number(myArray[i]["amount"]);
             local.push(myArray[i]["transactionDate"]);
@@ -141,6 +153,9 @@
             }
             if(myArray[i]["category"]=="entertainment"){
                 enter+=Number(myArray[i]["amount"]);
+            }
+            if(myArray[i]["category"]=="other"){
+                oth+=Number(myArray[i]["amount"]);
             }
         }
         function samedates(Array){
@@ -209,46 +224,35 @@
         var cell4 = newRow.insertCell(3)
         var cell5 = newRow.insertCell(4);
         var cell6 = newRow.insertCell(5);
+        var cell7 = newRow.insertCell(6);
         cell1.innerHTML = add+" dollars";
         cell2.innerHTML = parseFloat(food/add);
         cell3.innerHTML = parseFloat(enter/add);
         cell4.innerHTML = parseFloat(house/add);
         cell5.innerHTML = parseFloat(trans/add);
         cell6.innerHTML = parseFloat(util/add);
+        cell7.innerHTML=parseFloat(oth/add);
+        localStorage.setItem("fpercent", cell2.innerHTML);
+        localStorage.setItem("epercent", cell3.innerHTML);
+        localStorage.setItem("hpercent", cell4.innerHTML);
+        localStorage.setItem("tpercent", cell5.innerHTML);
+        localStorage.setItem("upercent", cell6.innerHTML);
+        localStorage.setItem("opercent", cell7.innerHTML);
         var t=document.getElementById('two');
         var nw=t.insertRow(t.rows.length);
         var cell1 = nw.insertCell(0);
         var cell2 = nw.insertCell(1);
         cell1.innerHTML=parseFloat(add/samedates(local));
         cell2.innerHTML=parseFloat(add/sameweek(local));
+        
         localStorage.setItem("food", food);
         localStorage.setItem("enter", enter);
         localStorage.setItem("house", house);
         localStorage.setItem("trans", trans);
         localStorage.setItem("util", util);
+        localStorage.setItem("oth", oth);
         var wBudget=localStorage.getItem("weekbudget");
         var mBudget=localStorage.getItem("monthbudget");
-
-        var avgfood= 0.128;
-        var avgtrans=0.168;
-        var avghouse=0.333;
-        var avgenter=0.047;
-        var avgutil=0.33;
-        var avgother=0.041;
-        if(0.1<parseFloat(food/add)&&parseFloat(food/add)<0.2){
-            if(0.1<parseFloat(trans/add)&&parseFloat(trans/add)<0.2){
-                if(0.3<parseFloat(house/add)&&parseFloat(house/add)<0.4){
-                    if(0.01<parseFloat(enter/add)&&parseFloat(enter/add)<0.1){
-                        if(0.3<parseFloat(util/add)&&parseFloat(util/add)<0.4){
-                            document.getElementById('result').innerHTML="Based on average US citizen statistics your expense catagories are average";
-                        }
-                    }
-                }
-            }
-        }
-        else{
-            document.getElementById('result').innerHTML="Based on average US citizen statistics your expense catagories are not average";
-        }
 
         function budget(){
             var weekcounter=0;
