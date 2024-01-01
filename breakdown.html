@@ -11,12 +11,14 @@
             width: 45%; 
             height: 50%;
             display: inline-block;
-            margin: 20px;
+            margin: 10px;
         }
         #bar{
             margin:10px;
         }
+
         #title{
+            margin-top:60px;
             text-align:center;
         }
         input{
@@ -48,10 +50,12 @@
         label {
             font-weight: bold;
         }
+
         #profit {
             display:none;
             width: 60%;
-            margin: 20px auto;
+            margin:10px auto;
+            margin-bottom: 100px;
             padding: 15px;
             text-align: center;
             font-size: 18px;
@@ -60,9 +64,34 @@
             color: #333;
             border-radius: 5px;
         }
+        nav {
+            background-color: black;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            font-family: Arial, sans-serif;
+            left: 0;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color:blue;
+        }
     </style>
 </head>
 <body>
+    <nav>
+        <a href="index.html">Back to homepage</a>
+        <a href="user.html">Back to user logging</a>
+    </nav>
     <h1 id="title">
         User Expense Categorical Breakdown
     </h1>
@@ -175,13 +204,13 @@
                     labels: ["January", "Febuary", "March", "April", "May", "June", "July", "August",
                 "September", "October", "November", "December"],
                     datasets: [{
-                        label:"Income",
+                        label:"Income (US $)",
                         data: [parseFloat(ir), parseFloat(ir),parseFloat(ir),parseFloat(ir),parseFloat(ir),parseFloat(ir),parseFloat(ir),
                         parseFloat(ir),parseFloat(ir),parseFloat(ir),parseFloat(ir),parseFloat(ir)],
                         backgroundColor:"blue"
                     },
                     {
-                        label:"Expenses",
+                        label:"Expenses (US $)",
                         data:[arr[0]["01"],arr[1]["02"],arr[2]["03"], arr[3]["04"], arr[4]["05"], arr[5]["06"],
                         arr[6]["07"],arr[7]["08"], arr[8]["09"], arr[9]["10"], arr[10]["11"], arr[11]["12"]],
                         backgroundColor:"red"
@@ -210,15 +239,13 @@
                 var sum=0;
                 for (var index of arr) {
                     for (var key in index) {
-                        for(var value in key){
-                            sum+=parseFloat(ir)-value;
-                        }
-
+                        console.log(index[key]);
+                        sum+=parseFloat(ir)-index[key];
                     }
                 }
                 document.getElementById("profit").style.display="block";
                 console.log(sum);
-                document.getElementById("profit").innerHTML="Your average monthly profit is "+sum/12.0+" $"; 
+                document.getElementById("profit").innerHTML="Your average monthly profit is "+(sum/12.0).toFixed(2)+" $"; 
             } 
             function by(){
                 document.getElementById("profit").style.display="none";
