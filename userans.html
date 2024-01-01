@@ -1,8 +1,9 @@
 <html>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css"> 
+    <script src="classes.js"></script>
     <style>
-
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
@@ -59,8 +60,6 @@
             margin: 20px auto 0;
             text-align: center;
         }
-        
-
     </style>
 </head>
 <body>
@@ -120,9 +119,7 @@
             cell3.innerHTML = category;
         }
         function updateTable() {
-            
             var table = document.getElementById('dataTable');
-            
             for (var i = 0; i < myArray.length; i++) {
                 addRowToTable(myArray[i].description, myArray[i].amount, myArray[i].category, myArray[i].transactionDate);
             }
@@ -180,7 +177,6 @@
                 }
             });
             return counter;
-            
         }
         function sameweek(dateArray) {
             const group = [];
@@ -188,7 +184,6 @@
             dateArray.forEach(date=> {
                 const dateObj = new Date(date);
                 dateObj.setDate(dateObj.getDate() + 1);
-                
                 const year = dateObj.getFullYear();
                 const weekNum = getWeek(dateObj)-1;
                 const weekKey = `${year}-W${weekNum< 10 ? '0' : ''}${weekNum}`;
@@ -244,7 +239,6 @@
         var cell2 = nw.insertCell(1);
         cell1.innerHTML=parseFloat(add/samedates(local));
         cell2.innerHTML=parseFloat(add/sameweek(local));
-        
         localStorage.setItem("food", food);
         localStorage.setItem("enter", enter);
         localStorage.setItem("house", house);
@@ -278,7 +272,6 @@
                 else{
                     monthArray[key2]=parseFloat(am);
                 }
-                
                 if(weekArray[key]>parseFloat(wBudget)&&weekcounter==0){
                     alert("You have exceeded your weekly budget for week "+key);
                     weekcounter+=1

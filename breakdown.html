@@ -1,7 +1,10 @@
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"> 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="classes.js"></script>
     <style>
         body {
             height: 100%;
@@ -22,7 +25,6 @@
         input{
             border:solid black; 
         }
-        
         form {
             display: inline-block;
             margin-top:40px;
@@ -67,14 +69,14 @@
         User Expense Categorical Breakdown
     </h1>
     <div id="chart">
-        User Catogorical Expense Percentages
+        User Categorical Expense Percentages
         <canvas id="PieChart"></canvas>
         <script>
-            if(localStorage.getItem("fpercent")+ localStorage.getItem("epercent")+localStorage.getItem("hpercent")+localStorage.getItem("tpercent")+ localStorage.getItem("upercent")+localStorage.getItem("opercent")==0){
+            if(localStorage.getItem("fpercent")+localStorage.getItem("epercent")+localStorage.getItem("hpercent")+localStorage.getItem("tpercent")+localStorage.getItem("upercent")+localStorage.getItem("opercent")==0){
                 alert("User has not logged any expenses")
             }
             var data = {
-                labels: ["Food", "Entertainment", "Housing", "Transporation", "Utilities", "Other"],
+                labels: ["Food", "Entertainment", "Housing", "Transportation", "Utilities", "Other"],
                 datasets: [{
                     data: [localStorage.getItem("fpercent"), localStorage.getItem("epercent"), localStorage.getItem("hpercent"),localStorage.getItem("tpercent"), 
                     localStorage.getItem("upercent"),localStorage.getItem("opercent")],
@@ -96,11 +98,11 @@
         </script>
     </div>
     <div id="chart">
-        Average American Annual User Categorical Percentages 2022(Per US Bureau of Labor Statistics)
+        Average American Annual User Categorical Percentages 2022 (Per US Bureau of Labor Statistics)
         <canvas id="PieChart2"></canvas>
         <script>
             var data2 = {
-                labels: ["Food", "Entertainment", "Housing", "Transporation", "Utilities", "Other"],
+                labels: ["Food", "Entertainment", "Housing", "Transportation", "Utilities", "Other"],
                 datasets: [{
                     data: [12.8, 4.7, 33.33, 16.8, 33.33, 4.1],
                     backgroundColor: ["blue", "black", "purple", "yellow", "red", "orange"]
@@ -122,8 +124,8 @@
     </div>
     <div id="container">
         <form>
-            Estimated Monthly Income in US $(after tax):
-            <input type ="number" id="input">
+            Estimated Monthly Income in US $ (after tax):
+            <input type="number" id="input">
             <input type="button" id="S" value="Submit" onclick="my()">
             <input type="button" id="R" value="Reset" onclick="by()">
         </form>
@@ -172,7 +174,7 @@
                     }
                 }
                 var data = {
-                    labels: ["January", "Febuary", "March", "April", "May", "June", "July", "August",
+                    labels: ["January", "February", "March", "April", "May", "June", "July", "August",
                 "September", "October", "November", "December"],
                     datasets: [{
                         label:"Income",
@@ -228,11 +230,9 @@
                 canvas.parentNode.removeChild(canvas);
                 document.getElementById("input").value="";
             }
-            
         </script>
     </div>
     <div id="profit">
-        
     </div>
 </body>
 </html>
