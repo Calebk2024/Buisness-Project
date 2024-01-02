@@ -1,0 +1,56 @@
+body {
+    height: 100%;
+    margin: 0;
+}
+#chart {
+    width: 45%; 
+    height: 50%;
+    display: inline-block;
+    margin: 20px;
+}
+#bar{
+    margin:10px;
+}
+#title{
+    text-align:center;
+}
+input{
+    border:solid black; 
+}
+form {
+    display: inline-block;
+    margin-top:40px;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    background-color: white;
+    font:black;
+}
+#container {
+    text-align: center;
+}
+#R{
+    display:none;
+    background-color:#45a049;
+    color:white;
+}
+#S{
+    background-color:#45a049;
+    color:white;
+}
+label {
+    font-weight: bold;
+}
+#profit {
+    display:none;
+    width: 60%;
+    margin: 20px auto;
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    box-sizing: border-box;
+    border: 1.5px solid black;
+    color: #333;
+    border-radius: 5px;
+}
