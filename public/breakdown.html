@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/breakdown.css"> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="javascript/breakdown.js"></script>
+    <title>User Expense Categorical Breakdown</title>
+</head>
+<body>
+    <h1 id="title">User Expense Categorical Breakdown</h1>
+    <div id="userChart">
+        User Categorical Expense Percentages
+        <canvas id="PieChart"></canvas>
+    </div>
+    <div id="averageChart">
+        Average American Annual User Categorical Percentages 2022 (Per US Bureau of Labor Statistics)
+        <canvas id="PieChart2"></canvas>
+    </div>
+    <div id="container">
+        <form>
+            Estimated Monthly Income in US $ (after tax):
+            <input type="number" id="input">
+            <input type="button" id="S" value="Submit" onclick="my()">
+            <input type="button" id="R" value="Reset" onclick="by()">
+        </form>
+    </div>
+    <div id="bar">
+        <canvas id="BarChart"></canvas>
+    </div>
+    <div id="profit"></div>
+</body>
+</html>
