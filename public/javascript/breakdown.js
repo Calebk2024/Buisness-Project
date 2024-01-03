@@ -68,7 +68,7 @@ function my() {
     canvas.height = 100;
 
     var barDiv = document.getElementById("bar");
-    barDiv.innerHTML = "";  // Clear existing content
+    barDiv.innerHTML = "";
     barDiv.appendChild(canvas);
 
     var c = document.getElementById("BarChart");

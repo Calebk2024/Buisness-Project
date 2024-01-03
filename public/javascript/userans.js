@@ -114,7 +114,7 @@ function calculatePercentages() {
         return 1 + Math.ceil((first - target) / 604800000);
     }
 
-    var table = document.getElementById('all');
+    var table = document.getElementById('percentages');
     var newRow = table.insertRow(table.rows.length);
     var cell1 = newRow.insertCell(0);
     var cell2 = newRow.insertCell(1);
@@ -137,10 +137,10 @@ function calculatePercentages() {
     localStorage.setItem("upercent", cell6.innerHTML);
     localStorage.setItem("opercent", cell7.innerHTML);
 
-    var t = document.getElementById('two');
-    var nw = t.insertRow(t.rows.length);
-    var cell1 = nw.insertCell(0);
-    var cell2 = nw.insertCell(1);
+    var t = document.getElementById('avgamount');
+    var newTable = t.insertRow(t.rows.length);
+    var cell1 = newTable.insertCell(0);
+    var cell2 = newTable.insertCell(1);
     cell1.innerHTML = parseFloat(add / samedates(local));
     cell2.innerHTML = parseFloat(add / sameweek(local));
 
