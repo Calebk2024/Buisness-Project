@@ -1,3 +1,4 @@
+/*
 body {
     height: 100%;
     margin: 0;
@@ -53,4 +54,88 @@ label {
     border: 1.5px solid black;
     color: #333;
     border-radius: 5px;
+}
+*/
+
+body {
+    height: 100%;
+    margin: 0;
+}
+#chart {
+    width: 45%; 
+    height: 50%;
+    display: inline-block;
+    margin: 10px;
+}
+#bar{
+    margin:10px;
+}
+
+#title{
+    margin-top:60px;
+    text-align:center;
+}
+input{
+    border:solid black; 
+}
+
+form {
+    display: inline-block;
+    margin-top:40px;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    background-color: white;
+    font:black;
+}
+#container {
+    text-align: center;
+}
+#R{
+    display:none;
+    background-color:#45a049;
+    color:white;
+}
+#S{
+    background-color:#45a049;
+    color:white;
+}
+label {
+    font-weight: bold;
+}
+
+#profit {
+    display:none;
+    width: 60%;
+    margin:10px auto;
+    margin-bottom: 100px;
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    box-sizing: border-box;
+    border: 1.5px solid black;
+    color: #333;
+    border-radius: 5px;
+}
+nav {
+    background-color: black;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    font-family: Arial, sans-serif;
+    left: 0;
+}
+nav a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+nav a:hover {
+    background-color: #ddd;
+    color:blue;
 }

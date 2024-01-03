@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const layout = {
         title: 'Expense Tracked per Category',
         xaxis: { title: 'Expense Category' },
-        yaxis: { title: 'Expense Amount ($)' }
+        yaxis: { title: 'Expense Amount (US $)' }
     };
 
     // Check if the element with id 'expense-chart' exists

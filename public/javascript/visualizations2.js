@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         },
         yaxis: {
-            title: 'Expense Amount ($)'
+            title: 'Expense Amount (US $)'
         }
     };
 
