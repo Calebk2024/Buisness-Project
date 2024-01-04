@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     var layout = {
+        font: { color: 'black', family: 'Arial', weight: 'bold' },
         title: 'Expense Tracked Each Day',
         xaxis: {
             title: 'Dates',
@@ -52,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
         yaxis: {
             title: 'Expense Amount (US $)'
         }
+        
     };
 
     // Check if the element with id 'plot' exists
