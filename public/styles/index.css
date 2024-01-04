@@ -1,13 +1,18 @@
+/* Resetting default styles and setting a background color */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
 }
+
+/* Styling for the navigation bar */
 nav {
     background-color: black;
     overflow: hidden;
 }
+
+/* Styling for navigation links */
 nav a {
     float: left;
     display: block;
@@ -16,13 +21,19 @@ nav a {
     padding: 14px 16px;
     text-decoration: none;
 }
+
+/* Hover effect for navigation links */
 nav a:hover {
     background-color: #ddd;
-    color:blue;
+    color: blue;
 }
+
+/* Styling for main content sections */
 section {
     padding: 20px;
 }
+
+/* Styling for the footer */
 footer {
     background-color: #333;
     color: #fff;
@@ -32,6 +43,8 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+/* Styling for an image with a shadow and border radius */
 #image {
     display: block;
     margin: 20px auto;
@@ -42,6 +55,8 @@ footer {
     justify-content: center;
     width: 400px;
 }
+
+/* Styling for a specific class with max-width, margin, padding, and background */
 #class {
     max-width: 800px;
     margin: 20px auto;
