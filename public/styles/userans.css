@@ -1,7 +1,9 @@
 /* Resetting default styles*/
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    text-align:center;
+    margin: 0;
+    padding: 0;
 }
 /* Styling page header and adjusting font*/
 h2 {
@@ -32,9 +34,6 @@ th {
 nav {
     background-color: black;
     overflow: hidden;
-    width: 100%;
-    top: 0;
-    left: 0;
 }
 /* Styling for navigation links */
 nav a {

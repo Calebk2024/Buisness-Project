@@ -9,21 +9,17 @@ body {
     width: 300px; 
     height: 300px;
     display: inline-block;
-    margin: 10px;
+    margin: 20px;
 }
 /* Average american annual user expense Pie Chart */
 #averageChart{
     width: 300px; 
     height: 300px;
     display: inline-block;
-    margin: 10px;
+    margin: 20px;
 }
 /* User Profit Bar graph */
 #bar{
-    /*
-    display:block;
-    height:50vh;
-    margin:10px auto;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,6 +59,7 @@ form {
 #S{
     background-color:#45a049;
     color:white;
+
 }
 label {
     font-weight: bold;
@@ -73,7 +70,6 @@ Setting default display as none */
     display:none;
     width: 60%;
     margin:10px auto;
-    margin-bottom: 100px;
     padding: 15px;
     text-align: center;
     font-size: 18px;
