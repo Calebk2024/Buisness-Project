@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
      */
     const layout = {
         font: { color: 'black', family: 'Arial', weight: 'bold' },
-        title: 'Expense Tracked Each Day',
+        title: 'Total Expense Amount Tracked Each Day',
         xaxis: {
             title: 'Dates',
             //X axis values will be displayed in date format.

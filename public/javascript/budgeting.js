@@ -82,12 +82,16 @@ function handleBudgetForm() {
     budgetFormInstance.handleForm();
 
     if (budgetInstance.weeklyBudget < 0 || isNaN(parseFloat(budgetInstance.weeklyBudget))) {
-        alert("Please enter a weekly budget that is not negative");
+        alert("Please enter a budget that is not negative and a real numerical value");
+        document.getElementById('weeklyBudget').value="";
+        document.getElementById('monthlyBudget').value="";
         return;
     }
 
     if (budgetInstance.monthlyBudget < 0 || isNaN(parseFloat(budgetInstance.monthlyBudget))) {
-        alert("Please enter a monthly budget that is not negative");
+        alert("Please enter a budget that is not negative and a real numerical value");
+        document.getElementById('monthlyBudget').value="";
+        document.getElementById('weeklyBudget').value="";
         return;
     }
 

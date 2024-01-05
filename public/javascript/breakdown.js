@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function() {
  * Runs when Reset button clicked.
  * Hides Reset Button and Profit value and Shows Submit Button
  */
-function by() {
+function res() {
     document.getElementById("profit").style.display = "none";
     document.getElementById("R").style.display = "none";
     document.getElementById("S").style.display = "inline-block";
@@ -75,7 +75,7 @@ function by() {
  * Hides Submit Button and Shows Reset Button and Displays Bar Graph of 
  * User Profits and Expenses per month.
  */
-function my() {
+function sub() {
     document.getElementById("S").style.display = "none";
     document.getElementById("R").style.display = "inline-block";
     // Create a new canvas element for the bar chart
@@ -94,9 +94,9 @@ function my() {
         return;
     }
     //Retrive user input value of estimated monthly income.
-    var ir = document.getElementById("input").value;
+    var monthIncome = document.getElementById("input").value;
     // Validate user input for a positive US $ amount.
-    if (parseFloat(ir) < 0 || isNaN(parseFloat(ir)) == true) {
+    if (parseFloat(monthIncome) < 0 || isNaN(parseFloat(monthIncome)) == true) {
         document.getElementById("R").style.display = "none";
         document.getElementById("S").style.display = "inline-block";
         alert('Please enter a positive US $ Amount');
@@ -143,13 +143,13 @@ function my() {
             "September", "October", "November", "December"],
         //Since monthly income the amount will be the same for every month.
         datasets: [{
-            label: "Income",
-            data: [parseFloat(ir), parseFloat(ir), parseFloat(ir), parseFloat(ir), parseFloat(ir), parseFloat(ir), parseFloat(ir),
-            parseFloat(ir), parseFloat(ir), parseFloat(ir), parseFloat(ir), parseFloat(ir)],
+            label: "Income (US $)",
+            data: [parseFloat(monthIncome), parseFloat(monthIncome), parseFloat(monthIncome), parseFloat(monthIncome), parseFloat(monthIncome), parseFloat(monthIncome), parseFloat(monthIncome),
+            parseFloat(monthIncome), parseFloat(monthIncome), parseFloat(monthIncome), parseFloat(monthIncome), parseFloat(monthIncome)],
             backgroundColor: "blue"
         },
         {
-            label: "Expenses",
+            label: "Expenses (US $)",
             data: [arr[0]["01"], arr[1]["02"], arr[2]["03"], arr[3]["04"], arr[4]["05"], arr[5]["06"],
             arr[6]["07"], arr[7]["08"], arr[8]["09"], arr[9]["10"], arr[10]["11"], arr[11]["12"]],
             backgroundColor: "red"
@@ -186,7 +186,7 @@ function my() {
     //Iterate through array dictionary 'arr'.
     for (var index of arr) {
         for (var key in index) {
-            sum += parseFloat(ir) - index[key];
+            sum += parseFloat(monthIncome) - index[key];
         }
     }
     //Display the 'profit' div element and define its inner html.

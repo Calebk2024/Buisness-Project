@@ -108,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (amount < 1) {
             alert('Please enter an amount above 0');
+            document.getElementById('amount').value="";
             return;
         }
 

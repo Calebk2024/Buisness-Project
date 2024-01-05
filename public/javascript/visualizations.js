@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
      */
     const layout = {
         font: { color: 'black', family: 'Arial', weight: 'bold' },
-        title: 'Expense Tracked per Category',
+        title: 'Expense Amount Tracked per Category',
         xaxis: { title: 'Expense Category' },
         yaxis: { title: 'Expense Amount (US $)' }
     };

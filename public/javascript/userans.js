@@ -102,120 +102,6 @@ function calculatePercentages() {
             oth += Number(myArray[i]["amount"]);
         }
     }
-    /**
-     * Count the number of unique dates in an array of date strings.
-     * Dates comprehended by ISO week date system
-     * @param {Array} Array - Array of date strings.
-     * @returns {number} - Number of unique dates.
-     */
-    function samedates(Array) {
-        /**
-        * Array to store unique dates.
-        * @type {Array}
-        */
-        const same = [];
-        /**
-        * Counter for the number of unique dates.
-        * @type {number}
-        */
-        let counter = 0;
-        Array.forEach(dateStr => {
-            //Creating new date object for each transaction date in 'Array'.
-            const dateObj = new Date(dateStr);
-            dateObj.setDate(dateObj.getDate() + 1);
-            // Extracting year, month, and day components from the date.
-            const year = dateObj.getFullYear();
-            const month = dateObj.getMonth() + 1;
-            const day = dateObj.getDate();
-            // Creating a standardized date string (YYYY-MM-DD)
-            const dateKey = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
-            /**
-            * Boolean that checks if the date is already in the 'same' array.
-            * @type {boolean}
-            */
-            bool = true;
-            for (let i = 0; i < same.length; i++) {
-                if (dateKey == same[i]) {
-                    bool = false;
-                }
-            }
-            // If the date is not in the 'same' array, add it and increment the counter.
-            if (bool) {
-                same.push(dateKey);
-                counter += 1;
-            }
-        });
-        // Return the count of unique days.
-        return counter;
-    }
-    /**
-     * Calculates the number of unique weeks represented by the array of dates.
-     * Weeks are comprehended based on the ISO week date system.
-     *
-     * @param {Array<string>} dateArray - An array of date strings.
-     * @returns {number} - Counter of unique weeks in the date array.
-     */
-    function sameweek(dateArray) {
-        /**
-        * Array to store unique weeks.
-        * @type {Array}
-        */
-        const group = [];
-        /**
-        * Counter for the number of unique weeks.
-        * @type {number}
-        */
-        let counter = 0;
-
-        dateArray.forEach(date => {
-            // Create a new date object.
-            const dateObj = new Date(date);
-            dateObj.setDate(dateObj.getDate() + 1);
-            // Extract year and week number.
-            const year = dateObj.getFullYear();
-            const weekNum = getWeek(dateObj) - 1;
-            // Generating a key for the week.
-            const weekKey = `${year}-W${weekNum < 10 ? '0' : ''}${weekNum}`;
-            // Check if the week key is already in the 'group' array.
-            let bool = true;
-            for (let i = 0; i < group.length; i++) {
-                if (weekKey === group[i]) {
-                    bool = false;
-                }
-            }
-            // If no other dates in the 'group' array have the same week key,
-            // add the week key to the array and increment the counter.
-            if (bool) {
-                group.push(weekKey);
-                counter += 1;
-            }
-        });
-        // Return the count of unique weeks
-        return counter;
-    }
-    /**
-     * Get function to determine the ISO week number of a given date.
-     *
-     * @param {Date} date - The date object.
-     * @returns {number} - The ISO week number.
-     */
-    function getWeek(date) {
-        //Creating a new date object
-        const target = new Date(date.valueOf());
-        //Calculate the day of the week
-        const day = (date.getDay() + 7) % 7;
-        // Set the target date to the Thursday of the current week.
-        target.setDate(target.getDate() - day + 3);
-        const first = target.valueOf();
-        // Set the target date to the first day of the current year.
-        target.setMonth(0, 1);
-        // Adjust to the first occurrence of a Thursday in the year if it is needed.
-        if (target.getDay() !== 0) {
-            target.setMonth(0, 1 + ((0 - target.getDay()) + 7) % 7);
-        }
-        // Calculate the ISO week number based on the Thursday of the week.
-        return 1 + Math.ceil((first - target) / 604800000);
-    }
     //Add new row in the category percentage tables 
     var table = document.getElementById('percentages');
     var newRow = table.insertRow(table.rows.length);
@@ -259,63 +145,7 @@ function calculatePercentages() {
     //Retrives the weekly budget and monthly budget variables
     var wBudget = localStorage.getItem("weekbudget");
     var mBudget = localStorage.getItem("monthbudget");
-    /**
-     * Calculates and tracks expenses on a weekly and monthly basis, providing alerts if budgets are exceeded.
-     *
-     * @function budget
-     */
-    function budget() {
-        /** Number of unique weeks.
-         * @type {number} */
-        var weekcounter = 0;
-        /** Number of unique months.
-         * @type {number} */
-        var monthcounter = 0;
-        /** Array of all the different weeks.
-         * @type {Array} */
-        var weekArray = {};
-        /** Array of all the different months.
-         * @type {Array} */
-        var monthArray = {};
-        // Iterating through each expense transaction in myArray.
-        myArray.forEach((t) => {
-            var am = t.amount;
-            var td = t.transactionDate;
-            //Create new object with the transaction date.
-            //Adjust date to start from 1 instead of 0.
-            var obj = new Date(td);
-            obj.setDate(obj.getDate() + 1);
-            //week number of transaction.
-            key = getWeek(obj) - 1;
-            //month number of transaction.
-            key2 = obj.getMonth() + 1;
-            //If week exists in week array increment it by the expense amount of t
-            if (weekArray[key]) {
-                weekArray[key] += parseFloat(am);
-            } 
-            else {
-                weekArray[key] = parseFloat(am);
-            }
-            //If month exists in month array increment it by the expense amount of t
-            if (monthArray[key2]) {
-                monthArray[key2] += parseFloat(am);
-            } 
-            else {
-                monthArray[key2] = parseFloat(am);
-            }
-            // Checking if weekly budget is exceeded and displaying an alert
-            if (weekArray[key] > parseFloat(wBudget) && weekcounter == 0) {
-                alert("You have exceeded your weekly budget for week " + key);
-                weekcounter += 1
-            }
-            // Checking if monthly budget is exceeded and displaying an alert
-            if (monthArray[key2] > parseFloat(mBudget) && monthcounter == 0) {
-                alert("You have exceeded your monthly budget for month " + key2);
-                monthcounter += 1
-            }
-        });
-    }
-    budget();
+    budget(wBudget, mBudget);
 }
 /**
  * Event listener for when the DOM content has been loaded.
@@ -325,3 +155,173 @@ document.addEventListener('DOMContentLoaded', function () {
     updateTable();
     calculatePercentages();
 });
+/**
+* Count the number of unique dates in an array of date strings.
+* Dates comprehended by ISO week date system
+* @param {Array} Array - Array of date strings.
+ * @returns {number} - Number of unique dates.
+*/
+function samedates(Array) {
+    /**
+    * Array to store unique dates.
+    * @type {Array}
+    */
+    const same = [];
+    /**
+    * Counter for the number of unique dates.
+    * @type {number}
+    */
+    let counter = 0;
+    Array.forEach(dateStr => {
+        //Creating new date object for each transaction date in 'Array'.
+        const dateObj = new Date(dateStr);
+        dateObj.setDate(dateObj.getDate() + 1);
+        // Extracting year, month, and day components from the date.
+        const year = dateObj.getFullYear();
+        const month = dateObj.getMonth() + 1;
+        const day = dateObj.getDate();
+        // Creating a standardized date string (YYYY-MM-DD)
+        const dateKey = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+        /**
+        * Boolean that checks if the date is already in the 'same' array.
+        * @type {boolean}
+        */
+        bool = true;
+        for (let i = 0; i < same.length; i++) {
+            if (dateKey == same[i]) {
+                bool = false;
+            }
+        }
+        // If the date is not in the 'same' array, add it and increment the counter.
+        if (bool) {
+            same.push(dateKey);
+            counter += 1;
+        }
+    });
+    // Return the count of unique days.
+    return counter;
+}
+/**
+* Calculates the number of unique weeks represented by the array of dates.
+* Weeks are comprehended based on the ISO week date system.
+*
+* @param {Array<string>} dateArray - An array of date strings.
+ * @returns {number} - Counter of unique weeks in the date array.
+*/
+function sameweek(dateArray) {
+    /**
+    * Array to store unique weeks.
+    * @type {Array}
+    */
+    const group = [];
+    /**
+    * Counter for the number of unique weeks.
+    * @type {number}
+    */
+    let counter = 0;
+
+    dateArray.forEach(date => {
+        // Create a new date object.
+        const dateObj = new Date(date);
+        dateObj.setDate(dateObj.getDate() + 1);
+        // Extract year and week number.
+        const year = dateObj.getFullYear();
+        const weekNum = getWeek(dateObj) - 1;
+        // Generating a key for the week.
+        const weekKey = `${year}-W${weekNum < 10 ? '0' : ''}${weekNum}`;
+        // Check if the week key is already in the 'group' array.
+        let bool = true;
+        for (let i = 0; i < group.length; i++) {
+            if (weekKey === group[i]) {
+                bool = false;
+            }
+        }
+        // If no other dates in the 'group' array have the same week key,
+        // add the week key to the array and increment the counter.
+        if (bool) {
+            group.push(weekKey);
+            counter += 1;
+        }
+    });
+    // Return the count of unique weeks
+    return counter;
+}
+/**
+* Calculates and tracks expenses on a weekly and monthly basis, providing alerts if budgets are exceeded.
+*
+* @function budget
+*/
+function budget(wBudget, mBudget) {
+    /** Number of unique weeks.
+     * @type {number} */
+    var weekcounter = 0;
+    /** Number of unique months.
+     * @type {number} */
+    var monthcounter = 0;
+    /** Array of all the different weeks.
+     * @type {Array} */
+    var weekArray = {};
+    /** Array of all the different months.
+     * @type {Array} */
+    var monthArray = {};
+    // Iterating through each expense transaction in myArray.
+    myArray.forEach((t) => {
+        var am = t.amount;
+        var td = t.transactionDate;
+        //Create new object with the transaction date.
+        //Adjust date to start from 1 instead of 0.
+        var obj = new Date(td);
+        obj.setDate(obj.getDate() + 1);
+        //week number of transaction.
+        key = getWeek(obj) - 1;
+        //month number of transaction.
+        key2 = obj.getMonth() + 1;
+        //If week exists in week array increment it by the expense amount of t
+        if (weekArray[key]) {
+            weekArray[key] += parseFloat(am);
+        } 
+        else {
+            weekArray[key] = parseFloat(am);
+        }
+        //If month exists in month array increment it by the expense amount of t
+        if (monthArray[key2]) {
+            monthArray[key2] += parseFloat(am);
+        } 
+        else {
+            monthArray[key2] = parseFloat(am);
+        }
+        // Checking if weekly budget is exceeded and displaying an alert
+        if (weekArray[key] > parseFloat(wBudget) && weekcounter == 0) {
+            alert("You have exceeded your weekly budget for week " + key);
+            weekcounter += 1
+        }
+        // Checking if monthly budget is exceeded and displaying an alert
+        if (monthArray[key2] > parseFloat(mBudget) && monthcounter == 0) {
+            alert("You have exceeded your monthly budget for month " + key2);
+            monthcounter += 1
+        }
+    });
+}
+/**
+* Get function to determine the ISO week number of a given date.
+*
+* @param {Date} date - The date object.
+* @returns {number} - The ISO week number.
+*/
+function getWeek(date) {
+    //Creating a new date object
+    const target = new Date(date.valueOf());
+    //Calculate the day of the week
+    const day = (date.getDay() + 7) % 7;
+    // Set the target date to the Thursday of the current week.
+    target.setDate(target.getDate() - day + 3);
+    const first = target.valueOf();
+    // Set the target date to the first day of the current year.
+    target.setMonth(0, 1);
+    // Adjust to the first occurrence of a Thursday in the year if it is needed.
+    if (target.getDay() !== 0) {
+        target.setMonth(0, 1 + ((0 - target.getDay()) + 7) % 7);
+    }
+    // Calculate the ISO week number based on the Thursday of the week.
+    return 1 + Math.ceil((first - target) / 604800000);
+}
