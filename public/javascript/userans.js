@@ -292,12 +292,12 @@ function budget(wBudget, mBudget) {
         }
         // Checking if weekly budget is exceeded and displaying an alert
         if (weekArray[key] > parseFloat(wBudget) && weekcounter == 0) {
-            alert("You have exceeded your weekly budget for week " + key);
+            alert("You have exceeded your weekly budget");
             weekcounter += 1
         }
         // Checking if monthly budget is exceeded and displaying an alert
         if (monthArray[key2] > parseFloat(mBudget) && monthcounter == 0) {
-            alert("You have exceeded your monthly budget for month " + key2);
+            alert("You have exceeded your monthly budget");
             monthcounter += 1
         }
     });
