@@ -24,7 +24,6 @@ class ExpenseLogger {
      */
     logExpense(description, amount, category, transactionDate) {
         this.expenseArray.push({ description, amount, category, transactionDate });
-        console.log(this.expenseArray);
         this.updateLocalStorage();
         this.clearForm();
         this.redirectToUserPage();
