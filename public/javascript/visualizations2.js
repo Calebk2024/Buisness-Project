@@ -76,6 +76,8 @@ document.addEventListener('DOMContentLoaded', function () {
             title: 'Expense Amount (US $)'
         }
     };
+    //Adjusts graph to window size
+    var config={responsive:true};
     /**
      * Check if the div element with id 'plot' exists.
      * If yes creates a new plot using Plotly library.
@@ -84,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
      */
     var plotElement = document.getElementById('plot');
     if (plotElement) {
-        Plotly.newPlot('plot', trace, layout);
+        Plotly.newPlot('plot', trace, layout, config);
     } 
     else {
         console.error("No DOM element with id 'plot' exists on the page.");

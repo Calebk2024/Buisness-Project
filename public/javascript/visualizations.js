@@ -106,6 +106,8 @@ document.addEventListener('DOMContentLoaded', function () {
         xaxis: { title: 'Expense Category' },
         yaxis: { title: 'Expense Amount (US $)' }
     };
+    //Adjusts graph to window size
+    var config={responsive:true};
     /**
      * Checks if div element with id 'expense-chart' exists and initializes the Plotly chart. 
      * If not will give out error.
@@ -113,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
      */
     var expenseChartElement = document.getElementById('expense-chart');
     if (expenseChartElement) {
-        Plotly.newPlot('expense-chart', data, layout);
+        Plotly.newPlot('expense-chart', data, layout,config);
     } 
     else {
         console.error("No DOM element with id 'expense-chart' exists on the page.");

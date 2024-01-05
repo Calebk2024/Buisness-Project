@@ -9,6 +9,7 @@ h2 {
     margin-top:60px;
     text-align:center;
     font-size:30px;
+    margin:20px auto;
 }
 /* Styling the expense tabke*/
 table {
@@ -31,7 +32,6 @@ th {
 nav {
     background-color: black;
     overflow: hidden;
-    position: fixed;
     width: 100%;
     top: 0;
     left: 0;
@@ -49,16 +49,4 @@ nav a {
 nav a:hover {
     background-color: #ddd;
     color:blue;
-}
-div#result{
-    box-sizing: border-box; 
-    border: 2px solid #999;
-    padding: 20px; 
-    margin: 0 auto;
-    width: 80%; 
-    font-family: 'Arial', sans-serif;
-    font-size: 16px;
-    color: #333;
-    margin: 20px auto 0;
-    text-align: center;
 }
